@@ -10,10 +10,14 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         "instantation"
-        if len(kwargs) is not 0:
+        if len(kwargs) != 0:
             for k, v in kwargs.items():
                 if k == "__class__":
                     continue
+                elif k == "created_at":
+                    v = datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
+                elif k == "updated_at":
+                    v = datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
                 setattr(self, k, v)
         self.id = str(uuid4())
         self.created_at = datetime.now()
