@@ -8,9 +8,13 @@ from uuid import uuid4
 class BaseModel:
     "class base"
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         "instantation"
-
+        if len(kwargs) is not 0:
+            for k, v in kwargs.items():
+                if k == "__class__":
+                    continue
+                setattr(self, k, v)
         self.id = str(uuid4())
         self.created_at = datetime.now()
         self.updated_at = self.created_at
