@@ -10,7 +10,11 @@ class BaseModel:
 
     def __init__(self, *args, **kwargs):
         "instantation"
-        if len(kwargs) != 0:
+        if not kwargs or len(kwargs) == 0:
+            self.id = str(uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
+        else:
             for k, v in kwargs.items():
                 if k == "__class__":
                     continue
@@ -18,10 +22,13 @@ class BaseModel:
                     v = datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
                 elif k == "updated_at":
                     v = datetime.strptime(v, "%Y-%m-%dT%H:%M:%S.%f")
+                if "id" not in kwargs.keys():
+                    self.id == str(uuid4())
+                if "created_at" not in kwargs.keys():
+                    self.created_at = datetime.now()
+                if "updated_at" not in kwargs.keys():
+                    self.updated_at = datetime.now()
                 setattr(self, k, v)
-        self.id = str(uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = self.created_at
 
     def __str__(self):
         "string replication"
