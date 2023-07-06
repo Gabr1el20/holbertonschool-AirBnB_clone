@@ -24,16 +24,18 @@ class FileStorage():
         "Serializes __objects to the JSON filepath"
         if FileStorage.__objects is not None:
             dict = {}
-            for k, v in FileStorage.items():
+            for k, v in FileStorage.__objects.items():
                 dict[k] = v.to_dict()
             with open(FileStorage.__file_path, 'w') as jsonfile:
-                dict.dump(dict, jsonfile)
+                json.dump(dict, jsonfile)
 
     def reload(self):
-        "Deserializes the JSON file to __objects"
-        if os.path.exists(FileStorage.__file_path):
-            with open(FileStorage.__file_path, 'r') as file:
-                new = json.load(file)
-            for k, v in new.items():
-                init = FileStorage.class_dict[v["__class__"]](**v)
-                FileStorage.__objects[k] = init
+        try:
+            with open(self.__file_path, 'r') as file:
+                serialized_objects = json.load(file)
+                for key, obj_dict in serialized_objects.items():
+                    class_name, obj_id = key.split('.')
+                    obj = BaseModel(**obj_dict)
+                    self.__objects[key] = obj
+        except Exception:
+            pass
