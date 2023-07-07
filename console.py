@@ -53,7 +53,7 @@ class HBNBCommand(cmd.Cmd):
             instance.save()
 
     def do_show(self, args):
-        """ Prints str representation of an instance """
+        " Prints str representation of an instance "
         arg = args.split()
         if not arg:
             print("** class name missing **")
@@ -72,13 +72,13 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_destroy(self, args):
-        """ Deletes an instance based on the class name and id """
+        " Deletes an instance based on the class name and id "
         arg = args.split()
         if len(arg) == 0:
             print("** class name missing **")
         elif len(arg) == 1:
             print("** instance id missing **")
-        elif arg[0] not in classes:
+        elif arg[0] not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
         else:
@@ -91,6 +91,43 @@ class HBNBCommand(cmd.Cmd):
                     print("** no instance fund **")
             except Exception:
                 print("** class dosen't exist")
+
+    def do_all(self, args):
+        " Prints all str representation of all instances "
+        arg = args.split()
+        if len(args) >= 1:
+            try:
+                eval(args)()
+                print(storage.all())
+            except Exception:
+                print("** class doesn't exist **")
+        else:
+            print(storage.all())
+
+    def do_update(self, args):
+        """ Updates an instance based on the class name and id """
+        arg = args.split()
+        if len(arg) == 0:
+            print("** class name missing **")
+            return False
+        if arg[0] in HBNBCommand.classesclasses:
+            if len(arg) > 1:
+                key = arg[0] + '.' + arg[1]
+                if key in storage.all():
+                    if len(arg) > 2:
+                        if len(arg) > 3:
+                            setattr(storage.all()[key], arg[2], arg[3])
+                            storage.all()[key].save()
+                        else:
+                            print("** value missing **")
+                    else:
+                        print("** attribute name missing **")
+                else:
+                    print("** no instance found **")
+            else:
+                print("** instance id missing **")
+        else:
+            print("** class doesn't exist **")
 
 
 if __name__ == '__main__':
