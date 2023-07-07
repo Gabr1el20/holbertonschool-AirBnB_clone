@@ -44,9 +44,9 @@ class HBNBCommand(cmd.Cmd):
         "create a new instance"
         arg = args.split()
         if not arg:
-            print("** class name missing**")
+            print("** class name missing **")
         elif arg[0] not in HBNBCommand.classes.keys():
-            print("**class doesn't exist")
+            print("** class doesn't exist **")
         else:
             instance = HBNBCommand.classes[arg[0]]()
             print(instance.id)
@@ -88,9 +88,9 @@ class HBNBCommand(cmd.Cmd):
                     del storage.all()[f"{arg[0]}.{arg[1]}"]
                     storage.save()
                 except Exception:
-                    print("** no instance fund **")
+                    print("** no instance found **")
             except Exception:
-                print("** class dosen't exist")
+                print("** class doesn't exist")
 
     def do_all(self, args):
         " Prints all str representation of all instances "
