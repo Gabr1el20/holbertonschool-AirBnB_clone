@@ -1,4 +1,5 @@
 # AirBnB clone: The CONSOLE
+![Logo](images/logo.png)
 ## Requirements
 -  Allowed editors: vi, vim, emacs
 -  All your files will be interpreted/compiled on Ubuntu 20.04 LTS using python3 (version 3.8.5)
@@ -15,6 +16,7 @@
   
 ## Description of the proyect
 The objective of this instance of the project is to replicate the management of the airBnB page console, and to implement the persistency of all our previous objects already created, with the help of the file storages engine.
+![Diagram](images/file.png)
 ### Command interpreter
 Used to manipulate data without a visual interface, like in a Shell.
 
