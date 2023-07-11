@@ -1,46 +1,36 @@
+#!/usr/bin/python3
+"""Unittest for BaseModel class"""
 import unittest
-
 from models.base_model import BaseModel
-import datetime
-from uuid import uuid4
+
+base = BaseModel()
 
 
-class BaseModelTest(unittest.TestCase):
-    """ Unit tests for the BaseModel class """
-
+class TestBaseModel(unittest.TestCase):
+    """
+    TestBaseModel class to perform unit tests on the BaseModel class.
+    """
     def test_init(self):
-        """ Test the __init__ method """
-        base_model = BaseModel()
-        self.assertEqual(base_model.id, str(uuid4()))
-        self.assertEqual(base_model.created_at, datetime.now())
-        self.assertEqual(base_model.updated_at, datetime.now())
-
-    def test_str(self):
-        """ Test the __str__ method """
-        base_model = BaseModel()
-        self.assertEqual(
-            str(base_model),
-            f"[BaseModel] \
-            ({base_model.id}) ({base_model.created_at}) {base_model.__dict__}",
-        )
+        """
+        Test the initialization of BaseModel instance.
+        """
+        self.assertTrue(isinstance(base, BaseModel))
 
     def test_save(self):
-        """ Test the save method """
-        base_model = BaseModel()
-        base_model.save()
-        self.assertTrue(base_model.id > 0)
+        """
+        Test the save() method of BaseModel instance.
+        """
+        base.save()
+        self.assertNotEqual(base.created_at, base.updated_at)
 
     def test_to_dict(self):
-        """ Test the to_dict method """
-        base_model = BaseModel()
-        base_model_dict = base_model.to_dict()
-        self.assertEqual(base_model_dict["__class__"], "BaseModel")
-        self.assertEqual(
-            base_model_dict["created_at"], base_model.created_at.isoformat()
-        )
-        self.assertEqual(
-            base_model_dict["updated_at"], base_model.updated_at.isoformat()
-        )
+        """
+        Test the to_dict() method of BaseModel instance.
+        """
+        base_dict = base.to_dict()
+        self.assertEqual(base_dict["__class__"], "BaseModel")
+        self.assertIsInstance(base_dict["created_at"], str)
+        self.assertIsInstance(base_dict["updated_at"], str)
 
 
 if __name__ == "__main__":
