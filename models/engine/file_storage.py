@@ -30,12 +30,8 @@ class FileStorage():
                 json.dump(dict, jsonfile)
 
     def reload(self):
-        try:
-            with open(self.__file_path, 'r') as file:
-                serialized_objects = json.load(file)
-                for key, obj_dict in serialized_objects.items():
-                    class_name, obj_id = key.split('.')
-                    obj = BaseModel(**obj_dict)
-                    self.__objects[key] = obj
-        except Exception:
-            pass
+        "Reload the JSON file to __Objects"
+        if os.path.exists(FileStorage.__file_path):
+            with open(FileStorage.__file_path) as f:
+                for key, value in json.load(f).items():
+                    self.__objects[key] = eval(v["__class__"])(**v)
