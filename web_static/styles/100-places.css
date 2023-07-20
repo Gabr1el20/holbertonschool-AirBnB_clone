@@ -125,3 +125,32 @@ li.tv {
     background-repeat: no-repeat;
     background-position: 0% 0%;
 }
+
+h2.rev_title {
+    font-size: 16px;
+    border-bottom: 1px solid #dddddd;
+    width: 390px;
+    margin-left: 1px;
+    text-align: left;
+}
+
+p.rev_p {
+    font-size: 12px;
+    text-align: left;
+    margin-top: 2px;
+    width: 390px;
+}
+
+h3 {
+    text-align: left;
+    padding-left: 0px;
+    margin-bottom: 2px;
+    width: 390px;
+}
+
+li.single_review {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 0px;
+}
