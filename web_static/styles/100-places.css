@@ -153,3 +153,7 @@ li.single_review {
     justify-content: flex-start;
     margin-left: 0px;
 }
+
+.amenities, .reviews {
+    margin-top: 40px;
+}
